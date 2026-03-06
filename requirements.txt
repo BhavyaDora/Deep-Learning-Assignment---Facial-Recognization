@@ -1,0 +1,25 @@
+# Facial Recognition Application — Python Dependencies
+# Install with:  pip install -r requirements.txt
+
+# ── Core Deep Learning / Face AI ───────────────────────────────────────────
+deepface==0.0.93          # FaceNet, ArcFace, VGG-Face etc. via unified API
+tensorflow>=2.12.0        # Backend for FaceNet (deepface dependency)
+tf-keras>=2.13.0          # Required by retinaface when TensorFlow >= 2.12
+# OR use:  tensorflow-cpu  for CPU-only machines
+
+# ── Computer Vision ────────────────────────────────────────────────────────
+opencv-python>=4.8.0      # Webcam capture, image processing, Haar Cascade
+opencv-contrib-python>=4.8.0  # Optional extra OpenCV modules
+
+# ── Scientific Computing ───────────────────────────────────────────────────
+numpy>=1.24.0
+scikit-learn>=1.3.0       # Cosine similarity, utilities
+
+# ── UI / Dashboard ─────────────────────────────────────────────────────────
+streamlit>=1.32.0
+
+# ── Utilities ──────────────────────────────────────────────────────────────
+Pillow>=10.0.0            # Image I/O used internally by deepface / streamlit
+tqdm>=4.65.0              # Progress bars (deepface model download)
+requests>=2.31.0          # Model weight downloads
+gdown>=4.7.0              # Google Drive model downloads (deepface)
