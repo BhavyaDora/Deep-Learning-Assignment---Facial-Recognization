@@ -20,12 +20,8 @@ import numpy as np
 from pathlib import Path
 
 # ── DeepFace wrapper ──────────────────────────────────────────────────────────
-try:
-    from deepface import DeepFace as _DeepFace
-    DEEPFACE_AVAILABLE = True
-except ImportError:
-    DEEPFACE_AVAILABLE = False
-    print("[WARNING] deepface not installed. Run:  pip install deepface")
+from deepface import DeepFace as _DeepFace
+DEEPFACE_AVAILABLE = True
 
 # Model used for face representation
 # Choices: "Facenet", "Facenet512", "ArcFace", "VGG-Face", "OpenFace", "DeepFace"

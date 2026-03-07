@@ -240,7 +240,7 @@ elif page == "🎥 Real-Time Recognition":
         st.session_state.rec_running = False
         info_placeholder.info("Recognition stopped.")
 
-    # ── Running: grab one frame, display, then rerun ──────────────────────
+    # ── Running: grab one frame, display ───────────────────────────────────
     if st.session_state.rec_running:
         cap = st.session_state.rec_cap
         st.info("🟢 Recognition running — click **⏹ Stop** to end.")
@@ -249,13 +249,15 @@ elif page == "🎥 Real-Time Recognition":
             st.error("❌ Webcam connection lost.")
             st.session_state.rec_running = False
         else:
-            ret, frame = cap.read()
-            if not ret:
-                st.warning("⚠️ Could not read frame from webcam.")
-                cap.release()
-                st.session_state.rec_cap     = None
-                st.session_state.rec_running = False
-            else:
+            while st.session_state.rec_running:
+                ret, frame = cap.read()
+                if not ret:
+                    st.warning("⚠️ Could not read frame from webcam.")
+                    cap.release()
+                    st.session_state.rec_cap     = None
+                    st.session_state.rec_running = False
+                    break
+                
                 annotated, results = recognize_frame(frame, db, threshold)
                 frame_rgb = cv2.cvtColor(annotated, cv2.COLOR_BGR2RGB)
                 frame_placeholder.image(
@@ -272,9 +274,8 @@ elif page == "🎥 Real-Time Recognition":
                 else:
                     info_placeholder.markdown("_No faces detected in frame._")
 
-                # Drive the next frame — keeps Streamlit responsive
-                time.sleep(0.03)   # ~30 fps cap
-                st.rerun()
+                # Limit UI update rate to ~30 FPS
+                time.sleep(0.03)
     else:
         if not stop:
             st.markdown(
