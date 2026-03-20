@@ -164,4 +164,6 @@ Annotated Frame displayed in Streamlit
 
 ## 👨‍💻 Author
 
-University AI/ML Deep Learning Project — 2025
+University AI/ML Deep Learning Project — 2026
+Jothik:     23STUCHH011556
+Bhavya:     23STUCHH010495
